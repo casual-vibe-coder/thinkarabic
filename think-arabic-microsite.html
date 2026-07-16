@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Think Arabic Academy — You can read it. You can't speak it.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Manrope:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#05080F;
+  --surface:#0B1220;
+  --raise:#101C2F;
+  --line:rgba(140,175,235,.14);
+  --line-2:rgba(140,175,235,.28);
+  --blue:#1B6EF3;
+  --blue-lift:#5BA3FF;
+  --gold:#E0AC3F;
+  --paper:#EEF3FA;
+  --muted:#8093B0;
+  --w-white:#E9EDF3; --w-blue:#1E5BB8; --w-purple:#6E3DA6;
+  --w-brown:#7A4A24; --w-black:#1A1F27; --w-red:#C0392F;
+  --shell:1180px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--ink);color:var(--paper);
+  font-family:'Manrope',system-ui,sans-serif;
+  font-size:16.5px;line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(720px 480px at 78% -8%, rgba(27,110,243,.16), transparent 62%),
+    radial-gradient(560px 400px at 4% 8%, rgba(27,110,243,.07), transparent 60%);
+}
+.shell{width:100%;max-width:var(--shell);margin:0 auto;padding:0 28px;position:relative;z-index:1}
+
+/* ---------- type ---------- */
+.dsp{font-family:'Archivo',sans-serif;font-weight:900;text-transform:uppercase;letter-spacing:-.028em;line-height:.94}
+.mono{font-family:'IBM Plex Mono',monospace}
+.eyebrow{
+  font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:500;
+  letter-spacing:.19em;text-transform:uppercase;color:var(--blue-lift);
+  display:flex;align-items:center;gap:11px;
+}
+.eyebrow::before{content:'';width:22px;height:1px;background:var(--blue);flex:none}
+.eyebrow.gold{color:var(--gold)}
+.eyebrow.gold::before{background:var(--gold)}
+h2.dsp{font-size:clamp(30px,4.4vw,50px)}
+h3{font-family:'Archivo',sans-serif;font-weight:800;font-size:20px;letter-spacing:-.015em}
+p.lede{font-size:18.5px;color:#C4D2E6;line-height:1.68}
+.muted{color:var(--muted)}
+
+/* ---------- nav ---------- */
+header{
+  position:sticky;top:0;z-index:60;
+  background:rgba(5,8,15,.82);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.nav{display:flex;align-items:center;gap:30px;height:70px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex:none}
+.logo-mk{
+  width:30px;height:30px;border-radius:7px;flex:none;
+  background:linear-gradient(150deg,var(--blue),#0B3C93);
+  display:grid;place-items:center;
+  font-family:'Archivo',sans-serif;font-weight:900;font-size:14px;color:#fff;
+  box-shadow:0 0 0 1px rgba(91,163,255,.34), 0 6px 18px -6px rgba(27,110,243,.7);
+}
+.logo-tx{font-family:'Archivo',sans-serif;font-weight:900;font-size:15.5px;letter-spacing:-.02em;text-transform:uppercase;color:var(--paper)}
+.logo-tx b{color:var(--blue-lift);font-weight:900}
+.nav-links{display:flex;gap:4px;margin-left:auto;align-items:center}
+.nav-links a{
+  font-size:13.5px;font-weight:600;color:var(--muted);text-decoration:none;
+  padding:8px 13px;border-radius:8px;transition:color .18s,background .18s;
+}
+.nav-links a:hover{color:var(--paper);background:rgba(140,175,235,.07)}
+.nav-links a.on{color:var(--paper)}
+.nav-cta{
+  font-family:'Manrope',sans-serif;font-size:13.5px;font-weight:700;
+  background:var(--gold);color:#1A1206;text-decoration:none;
+  padding:10px 17px;border-radius:9px;flex:none;
+  transition:transform .16s, box-shadow .16s;
+  box-shadow:0 6px 20px -8px rgba(224,172,63,.8);
+}
+.nav-cta:hover{transform:translateY(-1px);box-shadow:0 10px 26px -8px rgba(224,172,63,.9)}
+.burger{display:none;margin-left:auto;background:none;border:1px solid var(--line-2);border-radius:8px;color:var(--paper);width:40px;height:36px;cursor:pointer;font-size:15px}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;gap:9px;
+  font-size:14.5px;font-weight:700;text-decoration:none;
+  padding:14px 22px;border-radius:10px;cursor:pointer;border:0;
+  transition:transform .16s,box-shadow .16s,background .16s;
+  font-family:'Manrope',sans-serif;
+}
+.btn-gold{background:var(--gold);color:#1A1206;box-shadow:0 8px 26px -10px rgba(224,172,63,.85)}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 14px 34px -10px rgba(224,172,63,.95)}
+.btn-ghost{background:rgba(140,175,235,.06);color:var(--paper);border:1px solid var(--line-2)}
+.btn-ghost:hover{background:rgba(140,175,235,.13);transform:translateY(-2px)}
+.btn-blue{background:var(--blue);color:#fff;box-shadow:0 8px 26px -10px rgba(27,110,243,.9)}
+.btn-blue:hover{transform:translateY(-2px)}
+
+/* ---------- page routing ---------- */
+.page{display:none;padding-bottom:20px}
+.page.live{display:block;animation:fade .42s ease}
+@keyframes fade{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
+section{padding:74px 0}
+.rule{height:1px;background:var(--line);width:100%}
+
+/* ---------- hero ---------- */
+.hero{padding:74px 0 54px}
+.hero-grid{display:grid;grid-template-columns:1.12fr .88fr;gap:52px;align-items:center}
+.hero h1{font-size:clamp(42px,6.6vw,80px);margin:20px 0 0}
+.hero h1 .dim{color:#3D5A85;display:block}
+.hero p{margin:24px 0 0;max-width:50ch}
+.hero-btns{display:flex;gap:12px;margin-top:32px;flex-wrap:wrap}
+.hero-meta{display:flex;gap:26px;margin-top:34px;flex-wrap:wrap}
+.hero-meta div{display:flex;flex-direction:column;gap:3px}
+.hero-meta b{font-family:'Archivo',sans-serif;font-weight:800;font-size:21px;letter-spacing:-.02em}
+.hero-meta span{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
+
+/* video card */
+.vid{
+  border:1px solid var(--line-2);border-radius:16px;overflow:hidden;
+  background:linear-gradient(165deg,#0D1B31,#070C16);
+  box-shadow:0 34px 80px -30px rgba(0,0,0,.95);
+}
+.vid-frame{
+  aspect-ratio:16/10;position:relative;display:grid;place-items:center;
+  background:
+    radial-gradient(420px 220px at 50% 42%, rgba(27,110,243,.3), transparent 68%),
+    repeating-linear-gradient(115deg, rgba(255,255,255,.028) 0 2px, transparent 2px 9px),
+    #060B15;
+  border-bottom:1px solid var(--line);
+}
+.vid-frame b{
+  font-family:'Archivo',sans-serif;font-weight:900;text-transform:uppercase;
+  font-size:clamp(22px,3vw,34px);letter-spacing:-.02em;line-height:.95;text-align:center;
+  color:#fff;text-shadow:0 4px 30px rgba(27,110,243,.75);
+}
+.vid-frame b i{display:block;font-style:normal;color:var(--blue-lift);font-size:.62em;letter-spacing:.06em}
+.play{
+  position:absolute;width:56px;height:56px;border-radius:50%;
+  background:rgba(224,172,63,.95);display:grid;place-items:center;
+  box-shadow:0 12px 40px -8px rgba(224,172,63,.85);
+  border:0;cursor:pointer;transition:transform .2s;
+}
+.play:hover{transform:scale(1.09)}
+.play::after{content:'';border-left:15px solid #1A1206;border-top:9px solid transparent;border-bottom:9px solid transparent;margin-left:4px}
+.vid-bar{display:flex;align-items:center;justify-content:space-between;padding:13px 16px;gap:10px}
+.vid-bar span{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted)}
+.tag-free{
+  font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;letter-spacing:.12em;
+  color:#7BE0B0;border:1px solid rgba(123,224,176,.4);background:rgba(123,224,176,.08);
+  padding:3px 8px;border-radius:5px;
+}
+
+/* ---------- belt rack ---------- */
+.rack{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:30px 0;background:rgba(11,18,32,.5)}
+.rack-in{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
+.belt{text-align:center;text-decoration:none;display:block;padding:8px 4px;border-radius:10px;transition:background .18s,transform .18s}
+.belt:hover{background:rgba(140,175,235,.06);transform:translateY(-3px)}
+.belt svg{width:100%;height:auto;max-width:118px;filter:drop-shadow(0 5px 12px rgba(0,0,0,.6))}
+.belt-nm{font-family:'Archivo',sans-serif;font-weight:800;font-size:12.5px;text-transform:uppercase;letter-spacing:.04em;margin-top:9px;color:var(--paper)}
+.belt-cf{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--muted);letter-spacing:.1em}
+
+/* ---------- timetable ---------- */
+.tt{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--surface)}
+.tt-row{
+  display:grid;grid-template-columns:112px 88px 1fr 150px 92px;
+  gap:14px;align-items:center;padding:15px 20px;
+  border-bottom:1px solid var(--line);
+  font-family:'IBM Plex Mono',monospace;font-size:13px;
+}
+.tt-row:last-child{border-bottom:0}
+.tt-row.head{background:rgba(27,110,243,.09);color:var(--blue-lift);font-size:10.5px;letter-spacing:.15em;text-transform:uppercase}
+.tt-row .day{color:var(--paper);font-weight:600}
+.tt-row .tm{color:var(--muted)}
+.tt-row .ttl{font-family:'Manrope',sans-serif;font-weight:600;font-size:14.5px;color:var(--paper)}
+.tt-row .who{color:var(--muted);font-size:12px}
+.tt-row:not(.head):hover{background:rgba(140,175,235,.04)}
+.pill{
+  font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;letter-spacing:.1em;
+  padding:4px 9px;border-radius:5px;text-align:center;display:inline-block;
+}
+.pill.free{color:#7BE0B0;border:1px solid rgba(123,224,176,.38);background:rgba(123,224,176,.08)}
+.pill.paid{color:var(--gold);border:1px solid rgba(224,172,63,.4);background:rgba(224,172,63,.08)}
+
+/* ---------- cards ---------- */
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.card{
+  background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:26px;
+  transition:border-color .2s,transform .2s;
+}
+.card:hover{border-color:var(--line-2);transform:translateY(-3px)}
+.card h3{margin-bottom:9px}
+.card p{font-size:14.5px;color:var(--muted);line-height:1.62}
+.num{
+  font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--blue-lift);
+  letter-spacing:.14em;margin-bottom:13px;display:block;
+}
+.sec-head{margin-bottom:34px;max-width:64ch}
+.sec-head h2{margin:14px 0 12px}
+
+/* ---------- proof ---------- */
+.proof{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.pf{
+  border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--surface);
+  text-decoration:none;display:block;transition:border-color .2s,transform .2s;
+}
+.pf:hover{border-color:var(--blue);transform:translateY(-4px)}
+.pf-th{
+  aspect-ratio:16/9;position:relative;display:grid;place-items:center;
+  background:radial-gradient(300px 160px at 50% 50%, rgba(27,110,243,.26), transparent 70%), #070D18;
+  border-bottom:1px solid var(--line);
+}
+.pf-th::after{
+  content:'';width:38px;height:38px;border-radius:50%;
+  background:rgba(238,243,250,.1);border:1px solid rgba(238,243,250,.3);
+  display:block;
+}
+.pf-dur{
+  position:absolute;bottom:9px;right:9px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;
+  background:rgba(5,8,15,.85);padding:3px 7px;border-radius:4px;color:var(--paper);
+}
+.pf-bd{padding:17px 18px}
+.pf-bd b{font-family:'Archivo',sans-serif;font-weight:800;font-size:15px;display:block;margin-bottom:5px}
+.pf-bd span{font-size:12.5px;color:var(--muted);line-height:1.55;display:block}
+
+/* ---------- split ways in ---------- */
+.ways{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.way{border:1px solid var(--line);border-radius:16px;padding:30px;background:var(--surface);position:relative;overflow:hidden}
+.way.hot{border-color:rgba(224,172,63,.42);background:linear-gradient(170deg,rgba(224,172,63,.07),var(--surface) 62%)}
+.way h3{font-size:24px;margin:12px 0 10px}
+.way ul{list-style:none;margin:18px 0 0;display:flex;flex-direction:column;gap:9px}
+.way li{font-size:14.5px;color:#C4D2E6;padding-left:22px;position:relative}
+.way li::before{content:'';position:absolute;left:0;top:8px;width:9px;height:9px;border-radius:2px;background:var(--blue)}
+.way.hot li::before{background:var(--gold)}
+.way .btn{margin-top:24px}
+
+/* ---------- belt detail rows ---------- */
+.bl-row{
+  display:grid;grid-template-columns:150px 1fr;gap:26px;align-items:center;
+  padding:22px 0;border-bottom:1px solid var(--line);
+}
+.bl-row:last-child{border-bottom:0}
+.bl-row svg{width:100%;max-width:140px;height:auto}
+.bl-tag{display:flex;align-items:baseline;gap:11px;margin-bottom:7px}
+.bl-tag b{font-family:'Archivo',sans-serif;font-weight:900;font-size:19px;text-transform:uppercase;letter-spacing:-.01em}
+.bl-tag i{font-family:'IBM Plex Mono',monospace;font-size:11px;font-style:normal;color:var(--blue-lift);letter-spacing:.12em;border:1px solid var(--line-2);padding:2px 7px;border-radius:4px}
+.bl-row p{font-size:14.5px;color:var(--muted);max-width:70ch}
+
+/* ---------- pricing ---------- */
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:start}
+.tier{border:1px solid var(--line);border-radius:16px;padding:28px;background:var(--surface);display:flex;flex-direction:column;height:100%}
+.tier.best{border-color:rgba(224,172,63,.5);background:linear-gradient(175deg,rgba(224,172,63,.08),var(--surface) 55%);box-shadow:0 26px 70px -34px rgba(224,172,63,.5)}
+.tier-nm{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.tier.best .tier-nm{color:var(--gold)}
+.tier-pr{font-family:'Archivo',sans-serif;font-weight:900;font-size:44px;letter-spacing:-.03em;margin:12px 0 2px;line-height:1}
+.tier-pr small{font-size:15px;font-weight:600;color:var(--muted);letter-spacing:0}
+.tier-goal{font-size:13px;color:var(--muted);margin-bottom:20px;padding-bottom:18px;border-bottom:1px solid var(--line)}
+.tier-goal b{color:var(--paper)}
+.tier ul{list-style:none;display:flex;flex-direction:column;gap:11px;margin-bottom:24px}
+.tier li{font-size:14px;color:#C4D2E6;padding-left:24px;position:relative;line-height:1.5}
+.tier li::before{
+  content:'';position:absolute;left:0;top:5px;width:13px;height:13px;border-radius:50%;
+  background:rgba(123,224,176,.14);border:1px solid rgba(123,224,176,.5);
+}
+.tier .btn{margin-top:auto;justify-content:center}
+
+/* ---------- faq ---------- */
+.faq{border-top:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{
+  padding:19px 0;cursor:pointer;font-weight:700;font-size:16px;
+  display:flex;justify-content:space-between;gap:20px;list-style:none;
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:'+';font-family:'IBM Plex Mono',monospace;color:var(--blue-lift);font-size:20px;flex:none}
+.faq details[open] summary::after{content:'\2013'}
+.faq p{padding:0 0 19px;color:var(--muted);font-size:14.5px;max-width:78ch}
+
+/* ---------- seats ---------- */
+.seats{border:1px solid rgba(224,172,63,.34);background:rgba(224,172,63,.05);border-radius:14px;padding:26px}
+.seat-dots{display:flex;gap:7px;flex-wrap:wrap;margin:16px 0 14px}
+.dot{width:26px;height:26px;border-radius:6px;border:1px solid var(--line-2);background:rgba(140,175,235,.05)}
+.dot.taken{background:var(--gold);border-color:var(--gold);box-shadow:0 0 14px -3px rgba(224,172,63,.75)}
+
+/* ---------- steps ---------- */
+.steps{display:flex;flex-direction:column;gap:0}
+.step{display:grid;grid-template-columns:56px 1fr;gap:20px;padding:20px 0;border-bottom:1px solid var(--line);align-items:start}
+.step:last-child{border-bottom:0}
+.step-n{
+  font-family:'Archivo',sans-serif;font-weight:900;font-size:26px;color:var(--blue);
+  letter-spacing:-.03em;line-height:1;
+}
+.step b{font-family:'Archivo',sans-serif;font-weight:800;font-size:16.5px;display:block;margin-bottom:5px}
+.step p{font-size:14.5px;color:var(--muted);max-width:72ch}
+
+/* ---------- cta band ---------- */
+.band{
+  border:1px solid var(--line-2);border-radius:18px;padding:52px 40px;text-align:center;
+  background:radial-gradient(560px 220px at 50% 0%, rgba(27,110,243,.2), transparent 70%), var(--surface);
+}
+.band h2{margin-bottom:14px}
+.band p{max-width:56ch;margin:0 auto 26px;color:var(--muted)}
+
+/* ---------- footer ---------- */
+footer{border-top:1px solid var(--line);padding:38px 0;margin-top:40px}
+.ft{display:flex;justify-content:space-between;gap:24px;align-items:center;flex-wrap:wrap}
+.ft span{font-size:12.5px;color:var(--muted)}
+.ft nav{display:flex;gap:18px;flex-wrap:wrap}
+.ft nav a{font-size:12.5px;color:var(--muted);text-decoration:none}
+.ft nav a:hover{color:var(--paper)}
+
+/* ---------- a11y + motion ---------- */
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--blue-lift);outline-offset:3px;border-radius:6px}
+.rv{opacity:0;transform:translateY(16px)}
+.rv.in{opacity:1;transform:none;transition:opacity .6s cubic-bezier(.2,.7,.3,1),transform .6s cubic-bezier(.2,.7,.3,1)}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .rv{opacity:1;transform:none}
+}
+
+/* ---------- responsive ---------- */
+@media(max-width:960px){
+  .hero-grid{grid-template-columns:1fr;gap:36px}
+  .grid-3,.proof,.tiers{grid-template-columns:1fr}
+  .ways,.grid-2{grid-template-columns:1fr}
+  .rack-in{grid-template-columns:repeat(3,1fr);gap:18px}
+  .nav-links{
+    display:none;position:absolute;top:70px;left:0;right:0;
+    background:#070C16;border-bottom:1px solid var(--line);
+    flex-direction:column;padding:12px;gap:2px;
+  }
+  .nav-links.open{display:flex}
+  .nav-links a{padding:12px;width:100%}
+  .burger{display:block}
+  .nav-cta{display:none}
+  .tt-row{grid-template-columns:76px 1fr;gap:5px 12px;padding:14px 15px}
+  .tt-row .who,.tt-row.head{display:none}
+  .tt-row .ttl{grid-column:2}
+  .tt-row .tm{grid-column:1}
+  .tt-row .pill{grid-column:2;justify-self:start;margin-top:3px}
+  .tt-row .day{grid-column:1;grid-row:1}
+  .bl-row{grid-template-columns:110px 1fr;gap:18px}
+  section{padding:56px 0}
+  .band{padding:38px 22px}
+}
+@media(max-width:520px){
+  .rack-in{grid-template-columns:repeat(2,1fr)}
+  .hero-meta{gap:18px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="shell nav">
+    <a class="logo" href="#/" data-go>
+      <span class="logo-mk">ت</span>
+      <span class="logo-tx">Think <b>Arabic</b></span>
+    </a>
+    <button class="burger" aria-label="Menu" aria-expanded="false" id="burger">☰</button>
+    <nav class="nav-links" id="menu">
+      <a href="#/pathway" data-go>The Pathway</a>
+      <a href="#/open" data-go>Open Conversation</a>
+      <a href="#/cohort" data-go>White → Blue</a>
+      <a href="#/pricing" data-go>Pricing</a>
+    </nav>
+    <a class="nav-cta" href="https://www.skool.com/thinkarabicacademy" target="_blank" rel="noopener">Join free →</a>
+  </div>
+</header>
+
+<main>
+
+<!-- ══════════════ HOME ══════════════ -->
+<div class="page" data-page="/">
+  <div class="shell hero">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow">Brothers only · 856 members · Free to join</div>
+        <h1 class="dsp">You can read it.<span class="dim">You can't speak it.</span></h1>
+        <p class="lede">You've done the courses. You know the grammar. You can read the ayah in front of you — and still go silent the moment someone speaks to you in Arabic.</p>
+        <p class="lede" style="margin-top:14px">That's not a knowledge problem. You've got nowhere to use it. This is the room where you do.</p>
+        <div class="hero-btns">
+          <a class="btn btn-gold" href="https://www.skool.com/thinkarabicacademy" target="_blank" rel="noopener">Join free — see everything inside →</a>
+          <a class="btn btn-ghost" href="#/open" data-go>How the open mat works</a>
+        </div>
+        <div class="hero-meta">
+          <div><b>856</b><span>Members</span></div>
+          <div><b>6</b><span>Belts · A1→C2</span></div>
+          <div><b>5×</b><span>Live classes weekly</span></div>
+          <div><b>£0</b><span>To join and watch</span></div>
+        </div>
+      </div>
+      <div class="vid rv">
+        <div class="vid-frame">
+          <b>Inside the<i>Academy</i></b>
+          <button class="play" aria-label="Play the Inside the Academy video"></button>
+        </div>
+        <div class="vid-bar">
+          <span>14:08 · Everything there is to see</span>
+          <span class="tag-free">FREE</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- belt rack -->
+  <div class="rack">
+    <div class="shell">
+      <div class="rack-in" id="rack"></div>
+    </div>
+  </div>
+
+  <!-- the timetable -->
+  <section>
+    <div class="shell">
+      <div class="sec-head rv">
+        <div class="eyebrow">This week, live</div>
+        <h2 class="dsp">No mystery. Here's the timetable.</h2>
+        <p class="lede">Most academies hide the schedule behind a sales page. Here it is. Three of these are free the day you join — sit in the back and watch before you pay anything.</p>
+      </div>
+      <div class="tt rv">
+        <div class="tt-row head"><span>Day</span><span>UK time</span><span>Class</span><span>Teacher</span><span>Access</span></div>
+        <div class="tt-row"><span class="day">TUE</span><span class="tm">16:00</span><span class="ttl">Arabic Literature</span><span class="who">Ustadh Dawud</span><span class="pill free">FREE</span></div>
+        <div class="tt-row"><span class="day">TUE</span><span class="tm">18:00</span><span class="ttl">Open Conversation</span><span class="who">Mark / Ahmed / Maher</span><span class="pill paid">MEMBERS</span></div>
+        <div class="tt-row"><span class="day">WED</span><span class="tm">16:00</span><span class="ttl">Grammar</span><span class="who">Ustadh Dawud</span><span class="pill free">FREE</span></div>
+        <div class="tt-row"><span class="day">THU</span><span class="tm">16:00</span><span class="ttl">Sarf</span><span class="who">Ustadh Dawud</span><span class="pill free">FREE</span></div>
+        <div class="tt-row"><span class="day">THU</span><span class="tm">18:00</span><span class="ttl">Open Conversation</span><span class="who">Mark / Ahmed / Maher</span><span class="pill paid">MEMBERS</span></div>
+        <div class="tt-row"><span class="day">MON·THU·FRI</span><span class="tm">20:00</span><span class="ttl">White → Blue Belt cohort</span><span class="who">Ustadh Mark</span><span class="pill paid">COHORT</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="shell"><div class="rule"></div></div>
+
+  <!-- no mystery -->
+  <section>
+    <div class="shell">
+      <div class="sec-head rv">
+        <div class="eyebrow">How we sell</div>
+        <h2 class="dsp">We give the information away.<br>You only pay for the reps.</h2>
+        <p class="lede">You're not new to this. You've tried the apps, the tutors, the AI, the courses. You don't need another man telling you he's got the secret — you need to see the thing working and decide for yourself.</p>
+      </div>
+      <div class="grid-3">
+        <div class="card rv">
+          <span class="num">01</span>
+          <h3>Watch before you pay</h3>
+          <p>Full class recordings are posted openly. Join free, sit in the classroom, watch a two-hour lesson end to end. If the format doesn't suit you, don't pay us.</p>
+        </div>
+        <div class="card rv">
+          <span class="num">02</span>
+          <h3>The information is free</h3>
+          <p>The 35-hour Learn to Read course, the grammar classes, the recordings, the method — all free. What costs money is being <em>in</em> the room doing the reps, not watching from the side.</p>
+        </div>
+        <div class="card rv">
+          <span class="num">03</span>
+          <h3>The limits are real</h3>
+          <p>A speaking class caps at 14 men. That's not a marketing timer — put 20 in a room and nobody speaks. When it's full, it's full, and the next man waits for a seat.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- proof -->
+  <section>
+    <div class="shell">
+      <div class="sec-head rv">
+        <div class="eyebrow gold">The proof</div>
+        <h2 class="dsp">Don't take our word. Watch a student.</h2>
+        <p class="lede">This is a real class, unedited — a brother who started with no speaking, seven months in, answering in Arabic with no English in the room.</p>
+      </div>
+      <div class="proof">
+        <a class="pf rv" href="https://www.skool.com/thinkarabicacademy" target="_blank" rel="noopener">
+          <div class="pf-th"><span class="pf-dur">45:00</span></div>
+          <div class="pf-bd"><b>Blue Belt example class</b><span>Seven months of study. Entirely in Arabic. This is the standard.</span></div>
+        </a>
+        <a class="pf rv" href="https://www.skool.com/thinkarabicacademy" target="_blank" rel="noopener">
+          <div class="pf-th"><span class="pf-dur">14:08</span></div>
+          <div class="pf-bd"><b>Inside the Academy</b><span>Every classroom, every belt, every live class — walked through.</span></div>
+        </a>
+        <a class="pf rv" href="https://www.skool.com/thinkarabicacademy" target="_blank" rel="noopener">
+          <div class="pf-th"><span class="pf-dur">30:00</span></div>
+          <div class="pf-bd"><b>Grammar-first vs conversation-first</b><span>Why most students stall at reading — and what we do instead.</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ways in -->
+  <section>
+    <div class="shell">
+      <div class="sec-head rv">
+        <div class="eyebrow">Two ways in</div>
+        <h2 class="dsp">Find your belt. Then find your room.</h2>
+      </div>
+      <div class="ways">
+        <div class="way rv">
+          <div class="eyebrow">Not speaking yet</div>
+          <h3>White → Blue Belt</h3>
+          <p class="muted" style="font-size:15px">A structured 4-month cohort that takes you from reading the script to holding your first real conversation. Fixed seats, fixed start date, a live assessment with a native speaker at the end.</p>
+          <ul>
+            <li>3 live classes a week · 20:00 UK</li>
+            <li>54 lessons · 81 hours of teaching</li>
+            <li>Keep-going guarantee if you do the work</li>
+            <li>Application + a call with Mark</li>
+          </ul>
+          <a class="btn btn-ghost" href="#/cohort" data-go>Join the waiting list →</a>
+        </div>
+        <div class="way hot rv">
+          <div class="eyebrow gold">Blue Belt and above</div>
+          <h3>Open Conversation</h3>
+          <p class="muted" style="font-size:15px">The open mat. Twice a week you turn up and speak — topics, debates, the hot seat — with a teacher whose only job is to pull the words out of you and hand you the ones you're missing.</p>
+          <ul>
+            <li>Tue + Thu · 18:00–20:00 UK</li>
+            <li>Free trial — sit in before you pay</li>
+            <li>14 seats a room. No more.</li>
+            <li>Cancel any time</li>
+          </ul>
+          <a class="btn btn-gold" href="#/open" data-go>See how it works →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="shell">
+      <div class="band rv">
+        <div class="eyebrow" style="justify-content:center">Free · Brothers only</div>
+        <h2 class="dsp" style="margin-top:14px">Come and look around.</h2>
+        <p>Join free, watch a full class, read the timetable, meet the brothers. If it's for you, you'll know without anyone selling you.</p>
+        <a class="btn btn-gold" href="https://www.skool.com/thinkarabicacademy" target="_blank" rel="noopener">Join the academy — free →</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ══════════════ PATHWAY ══════════════ -->
+<div class="page" data-page="/pathway">
+  <section>
+    <div class="shell">
+      <div class="sec-head">
+        <div class="eyebrow">The pathway</div>
+        <h2 class="dsp">Six belts. A1 to C2.<br>You always know where you stand.</h2>
+        <p class="lede">Every belt maps to the international CEFR standard, so your rank isn't our opinion — it's a level the rest of the world recognises. You earn the next one by speaking, live, with a native speaker. Not by finishing videos.</p>
+      </div>
+      <div id="beltRows"></div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="shell">
+      <div class="grid-2">
+        <div class="card">
+          <span class="num">HOW YOU RANK UP</span>
+          <h3>A live assessment, with a stranger</h3>
+          <p>You sit with a native speaker you've never met and hold a real conversation. Not a written test, not a memorised script — because a script proves nothing. Mistakes are expected. Recovering from them is the skill being measured.</p>
+        </div>
+        <div class="card">
+          <span class="num">WHERE MOST MEN ARE</span>
+          <h3>Stuck at the White Belt ceiling</h3>
+          <p>Reading fluently, understanding nothing spoken. It's the most common place to plateau, and it's not a discipline problem — it's an environment problem. Nobody around you speaks Arabic, so nothing ever gets used.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="shell">
+      <div class="band">
+        <h2 class="dsp">Not sure of your belt?</h2>
+        <p>Join free, sit in one class, and you'll know within ten minutes. So will we — and we'll tell you honestly which room you belong in.</p>
+        <a class="btn btn-gold" href="https://www.skool.com/thinkarabicacademy" target="_blank" rel="noopener">Join free and find out →</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ══════════════ OPEN CONVERSATION ══════════════ -->
+<div class="page" data-page="/open">
+  <section>
+    <div class="shell">
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow gold">Blue Belt and above · A2–B2</div>
+          <h2 class="dsp" style="font-size:clamp(38px,5.4vw,62px);margin:18px 0 0">Open<br>Conversation</h2>
+          <p class="lede" style="margin-top:22px">Martial artists have the open mat — the session where you stop drilling and actually spar. This is that, for Arabic. You turn up twice a week and you speak. The teacher's job isn't to lecture you; it's to keep you talking and feed you the words you're reaching for.</p>
+          <div class="hero-btns">
+            <a class="btn btn-gold" href="https://www.skool.com/thinkarabicacademy" target="_blank" rel="noopener">Start a free trial →</a>
+            <a class="btn btn-ghost" href="#/pricing" data-go>See pricing</a>
+          </div>
+        </div>
+        <div class="seats rv">
+          <div class="eyebrow gold">Room capacity</div>
+          <h3 style="margin:12px 0 4px;font-size:22px">14 seats. That's the room.</h3>
+          <p class="muted" style="font-size:14px">Seven men in a two-hour class is already the limit of what's useful — everyone has to actually speak. So a room caps at 14 across the week. When it's full we close it and open a waiting list. When enough men are waiting, we bring in a teacher and open the next room.</p>
+          <div class="seat-dots" aria-hidden="true">
+            <span class="dot taken"></span><span class="dot taken"></span><span class="dot taken"></span>
+            <span class="dot taken"></span><span class="dot taken"></span><span class="dot taken"></span>
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            <span class="dot"></span><span class="dot"></span>
+          </div>
+          <p class="mono" style="font-size:12px;color:var(--muted)">Live seat count shown on the community page.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="shell"><div class="rule"></div></div>
+
+  <section>
+    <div class="shell">
+      <div class="sec-head rv">
+        <div class="eyebrow">What a class is</div>
+        <h2 class="dsp">Four formats. You speak more than the teacher.</h2>
+        <p class="lede">No homework. No presentations. No slides to sit through. You come, you talk, you get corrected, you leave better.</p>
+      </div>
+      <div class="grid-2">
+        <div class="card rv"><span class="num">FORMAT 01</span><h3>Choose a topic</h3><p>The teacher puts up ten topics — life lessons, social media and children, travel, work. You pick one and talk. The room reacts, questions, disagrees. Vocabulary gets handed to you as you reach for it.</p></div>
+        <div class="card rv"><span class="num">FORMAT 02</span><h3>Describe the image</h3><p>One evocative image on screen. Describe it, interpret it, argue about what it means. It forces the language out of you sideways — you stop translating and start reaching.</p></div>
+        <div class="card rv"><span class="num">FORMAT 03</span><h3>The hot seat</h3><p>The room votes one brother into the seat. Everyone questions him on a theme — how Islam shaped you as a father, what you'd change about your twenties. Nowhere to hide, and that's the point.</p></div>
+        <div class="card rv"><span class="num">FORMAT 04</span><h3>The debate</h3><p>You're assigned a side — homeschool or public school — whether you believe it or not. Two minutes to argue it in Arabic. The room votes the stronger case. Competitive, and men try harder when they might lose.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="shell">
+      <div class="tt rv">
+        <div class="tt-row head"><span>Day</span><span>UK time</span><span>Class</span><span>Teacher</span><span>Access</span></div>
+        <div class="tt-row"><span class="day">TUE</span><span class="tm">18:00–20:00</span><span class="ttl">Open Conversation</span><span class="who">Mark / Ahmed / Maher</span><span class="pill paid">MEMBERS</span></div>
+        <div class="tt-row"><span class="day">THU</span><span class="tm">18:00–20:00</span><span class="ttl">Open Conversation</span><span class="who">Mark / Ahmed / Maher</span><span class="pill paid">MEMBERS</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="shell">
+      <div class="sec-head rv">
+        <div class="eyebrow">Straight answers</div>
+        <h2 class="dsp">Before you ask</h2>
+      </div>
+      <div class="faq rv">
+        <details><summary>Am I good enough to be in the room?</summary><p>If you can hold a basic conversation — introduce yourself, answer a question, talk about your family and your day without a script — you're Blue Belt and you're ready. If you're not there yet, don't force it: take the free Learn to Read course and join the White → Blue waiting list. You'll get more from the room when you can use it.</p></details>
+        <details><summary>What if I freeze or make a fool of myself?</summary><p>Every man in that room has frozen. The teacher regulates the difficulty per person — a fresh Blue Belt gets a question he can answer, a Brown Belt gets one that stretches him. Mistakes aren't the risk; silence is. Sit in on a trial class and watch before you decide.</p></details>
+        <details><summary>Is two hours a week actually enough?</summary><p>It's enough to keep the language alive and moving, which is more than most men get. It isn't a substitute for a structured course — if you want a promised outcome with a plan and a guarantee, that's the cohort, not the open mat.</p></details>
+        <details><summary>Why is there a waiting list?</summary><p>Because the room is capped at 14 and we won't ruin the class to take your money. If it's full, you wait for a seat or for the next room to open. We open a new room when enough brothers are waiting to justify a teacher for it.</p></details>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ══════════════ COHORT ══════════════ -->
+<div class="page" data-page="/cohort">
+  <section>
+    <div class="shell">
+      <div class="sec-head">
+        <div class="eyebrow">Structured cohort · 4 months</div>
+        <h2 class="dsp">White → Blue Belt.<br>From reading it to speaking it.</h2>
+        <p class="lede">The current cohort started on 2 July and is closed. The next one opens to the waiting list first — and it has never yet reached the public.</p>
+        <div class="hero-btns">
+          <a class="btn btn-gold" href="https://www.skool.com/thinkarabicacademy" target="_blank" rel="noopener">Join the waiting list →</a>
+        </div>
+      </div>
+      <div class="grid-3">
+        <div class="card rv"><span class="num">THE PROMISE</span><h3>You hold a real conversation</h3><p>Not perfectly. You'll make mistakes and keep going — that's the standard. By the end you speak about yourself, your family, your work, your travel and your deen, and you sit a live assessment with a native speaker you've never met.</p></div>
+        <div class="card rv"><span class="num">THE PLAN</span><h3>54 lessons · 81 hours</h3><p>Three live classes a week, Mon / Thu / Fri, 20:00–21:30 UK, for four months. Month one home and family, month two shopping, month three travel, month four study and work. Half of every class is you speaking.</p></div>
+        <div class="card rv"><span class="num">THE GUARANTEE</span><h3>We don't leave you behind</h3><p>Do the work — 46 of the 54 lessons, real effort, follow the pathway — and if you're still not ready for your Blue Belt assessment, we keep teaching you free until you are. Not a refund. Something better.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="shell"><div class="rule"></div></div>
+
+  <section>
+    <div class="shell">
+      <div class="sec-head rv">
+        <div class="eyebrow gold">How you get a seat</div>
+        <h2 class="dsp">You apply. We talk. That's it.</h2>
+        <p class="lede">No cart, no countdown, no upsell page. Seats are few and the wrong man in the room costs everyone, so there's a conversation first — both ways.</p>
+      </div>
+      <div class="steps rv">
+        <div class="step"><span class="step-n">1</span><div><b>Join the waiting list</b><p>Free. You'll see how many brothers are already on it — that number is real, and it's the only urgency we'll ever give you.</p></div></div>
+        <div class="step"><span class="step-n">2</span><div><b>Apply when the cohort opens</b><p>The waiting list is told first, always. You fill in an application and make your case: why you, why now. There are more applicants than seats and we pick the ones who'll finish.</p></div></div>
+        <div class="step"><span class="step-n">3</span><div><b>A call with Mark</b><p>Fifteen minutes. He'll work out your real level, tell you honestly whether this cohort suits you, and answer everything. If it's not right for you, he'll say so.</p></div></div>
+        <div class="step"><span class="step-n">4</span><div><b>Take your seat</b><p>You pay after you're accepted, not before. Then you show up three nights a week for four months and do the work.</p></div></div>
+        <div class="step"><span class="step-n">5</span><div><b>One scholarship, every cohort</b><p>One full seat is given free to the strongest application from a brother who genuinely needs it. Last cohort it went to Yusuf in Malaysia. It's a real seat, given away for real.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="shell">
+      <div class="band rv">
+        <div class="eyebrow" style="justify-content:center">Next cohort</div>
+        <h2 class="dsp" style="margin-top:14px">The list gets it first.</h2>
+        <p>When the next White → Blue cohort opens, the waiting list is told before anyone else — and it has filled from the list every time so far.</p>
+        <a class="btn btn-gold" href="https://www.skool.com/thinkarabicacademy" target="_blank" rel="noopener">Put me on the list →</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ══════════════ PRICING ══════════════ -->
+<div class="page" data-page="/pricing">
+  <section>
+    <div class="shell">
+      <div class="sec-head">
+        <div class="eyebrow">Pricing</div>
+        <h2 class="dsp">Free to join. Free to watch.<br>You pay to be in the room.</h2>
+        <p class="lede">The information doesn't cost anything — the courses, the recordings, the grammar classes, the method. What costs money is the live reps: a teacher, a capped room, and your turn to speak.</p>
+      </div>
+      <div class="tiers">
+        <div class="tier">
+          <div class="tier-nm">Standard</div>
+          <div class="tier-pr">Free</div>
+          <div class="tier-goal">Your goal: <b>Blue Belt</b></div>
+          <ul>
+            <li>Learn to Read Qur'an &amp; Arabic — full 35-hour course</li>
+            <li>Every video in the classroom, including full class recordings</li>
+            <li>Live Arabic Literature · Tue 16:00</li>
+            <li>Live Grammar · Wed 16:00</li>
+            <li>Live Sarf · Thu 16:00</li>
+            <li>The White → Blue waiting list</li>
+          </ul>
+          <a class="btn btn-ghost" href="https://www.skool.com/thinkarabicacademy" target="_blank" rel="noopener">Join free</a>
+        </div>
+        <div class="tier">
+          <div class="tier-nm">Premium</div>
+          <div class="tier-pr">$35<small> /month</small></div>
+          <div class="tier-goal">Your goal: <b>Purple Belt</b> · A2–B2</div>
+          <ul>
+            <li>Everything in Standard</li>
+            <li>Open Conversation with a teacher · Tue 18:00–20:00</li>
+            <li>Live feedback, correction and suggestions</li>
+            <li>Handle real conversations without leaning on a script</li>
+            <li>Free trial before you're charged</li>
+          </ul>
+          <a class="btn btn-blue" href="https://www.skool.com/thinkarabicacademy" target="_blank" rel="noopener">Start free trial</a>
+        </div>
+        <div class="tier best">
+          <div class="tier-nm">VIP · Both nights</div>
+          <div class="tier-pr">$50<small> /month</small></div>
+          <div class="tier-goal">Your goal: <b>Black Belt</b> · A2–B2</div>
+          <ul>
+            <li>Everything in Premium</li>
+            <li>Open Conversation twice a week · Tue + Thu 18:00–20:00</li>
+            <li>Double the reps — the single biggest factor in whether you get there</li>
+            <li>Express yourself across complex, varied topics</li>
+            <li>Free trial before you're charged</li>
+          </ul>
+          <a class="btn btn-gold" href="https://www.skool.com/thinkarabicacademy" target="_blank" rel="noopener">Start free trial</a>
+        </div>
+      </div>
+      <p class="mono" style="margin-top:20px;font-size:12px;color:var(--muted);text-align:center">The White → Blue cohort is priced separately — it's a structured course with a guarantee, not a membership. Application only.</p>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="shell">
+      <div class="sec-head rv"><div class="eyebrow">Questions</div><h2 class="dsp">The honest answers</h2></div>
+      <div class="faq rv">
+        <details><summary>Why is so much of it free?</summary><p>Because information isn't what's scarce. You can find grammar explanations anywhere, including from us, for nothing. What you can't get for free is a teacher in a capped room pulling the language out of you twice a week. We give away the first and charge for the second.</p></details>
+        <details><summary>What's the difference between $35 and $50?</summary><p>One night a week versus two. That's it — no hidden tier, no secret content. If you can only make Tuesdays, take Premium. If you want the reps, take VIP; it's the same room, twice.</p></details>
+        <details><summary>Can I try before I pay?</summary><p>Yes. Start a free trial and sit in on real classes. And before even that, you can join free and watch a full two-hour recording end to end. We'd rather you saw the thing than trusted a promise.</p></details>
+        <details><summary>Can I cancel?</summary><p>Any time, yourself. But be aware the room is capped at 14 — if you leave and there's a waiting list, your seat goes to the next brother, and you'd rejoin at the back of it. That's not a threat, it's just how a full room works.</p></details>
+        <details><summary>Is there a contract or a minimum term?</summary><p>No. Month to month. The class has to be worth paying for every single month, which is the way it should be.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="shell">
+      <div class="band rv">
+        <h2 class="dsp">Still deciding?</h2>
+        <p>Then don't decide yet. Join free, watch a class, read the room. Nobody will call you.</p>
+        <a class="btn btn-gold" href="https://www.skool.com/thinkarabicacademy" target="_blank" rel="noopener">Join free →</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+</main>
+
+<footer>
+  <div class="shell ft">
+    <span>Think Arabic Academy · Brothers only · Est. 2020</span>
+    <nav>
+      <a href="#/" data-go>Home</a>
+      <a href="#/pathway" data-go>The Pathway</a>
+      <a href="#/open" data-go>Open Conversation</a>
+      <a href="#/cohort" data-go>White → Blue</a>
+      <a href="#/pricing" data-go>Pricing</a>
+      <a href="https://www.skool.com/thinkarabicacademy" target="_blank" rel="noopener">The community ↗</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var BELTS = [
+    {n:'White', c:'A1', v:'--w-white', t:"Foundation. You can read the script, and that is where it stops. You know the words but they do not come out of your mouth in order \u2014 because you have never had to use them with another human."},
+    {n:'Blue', c:'A2', v:'--w-blue', t:"The first belt you earn. You hold a basic conversation: you introduce yourself, answer questions, talk about your family, your work and your travel, and you recover when you get it wrong. From here, the room switches to Arabic."},
+    {n:'Purple', c:'B1', v:'--w-purple', t:"Independent speaker. Familiar subjects come without the English detour \u2014 you are thinking in it, not translating into it. You carry your side of a conversation with a native speaker who is not slowing down for you."},
+    {n:'Brown', c:'B2', v:'--w-brown', t:"Strong intermediate. You handle a wide range of subjects, argue a position, follow a fast room. This is where the Qur\u2019an and hadith stop being a translation exercise and start being reading."},
+    {n:'Black', c:'C1', v:'--w-black', t:"Advanced. Classical texts, tafsir and hadith in the original, at pace. You express complicated ideas accurately and naturally without hunting for the structure."},
+    {n:'Red', c:'C2', v:'--w-red', t:"Near-mastery. You teach it, you analyse it, you argue in it. The end of the pathway \u2014 and the beginning of being useful to everyone behind you."}
+  ];
+
+  function beltSVG(varName, w){
+    var c = 'var(' + varName + ')';
+    return '<svg viewBox="0 0 200 46" role="img" aria-hidden="true">' +
+      '<rect x="0" y="14" width="80" height="15" rx="3" fill="'+c+'" stroke="rgba(0,0,0,.35)" stroke-width="1"/>' +
+      '<rect x="120" y="14" width="80" height="15" rx="3" fill="'+c+'" stroke="rgba(0,0,0,.35)" stroke-width="1"/>' +
+      '<rect x="86" y="29" width="11" height="16" rx="3" fill="'+c+'" stroke="rgba(0,0,0,.35)" stroke-width="1"/>' +
+      '<rect x="103" y="29" width="11" height="16" rx="3" fill="'+c+'" stroke="rgba(0,0,0,.35)" stroke-width="1"/>' +
+      '<rect x="74" y="9" width="52" height="25" rx="5" fill="'+c+'" stroke="rgba(0,0,0,.45)" stroke-width="1"/>' +
+      '<path d="M78 21 h44" stroke="rgba(0,0,0,.22)" stroke-width="1.4"/>' +
+      '</svg>';
+  }
+
+  // rack
+  var rack = document.getElementById('rack');
+  if(rack){
+    rack.innerHTML = BELTS.map(function(b){
+      return '<a class="belt" href="#/pathway" data-go>' + beltSVG(b.v) +
+        '<div class="belt-nm">'+b.n+'</div><div class="belt-cf">'+b.c+'</div></a>';
+    }).join('');
+  }
+
+  // belt detail rows
+  var rows = document.getElementById('beltRows');
+  if(rows){
+    rows.innerHTML = BELTS.map(function(b){
+      return '<div class="bl-row">' + beltSVG(b.v) +
+        '<div><div class="bl-tag"><b>'+b.n+' Belt</b><i>'+b.c+'</i></div><p>'+b.t+'</p></div></div>';
+    }).join('');
+  }
+
+  // routing
+  var pages = Array.prototype.slice.call(document.querySelectorAll('.page'));
+  var links = Array.prototype.slice.call(document.querySelectorAll('.nav-links a'));
+  function route(){
+    var h = (location.hash || '#/').replace('#','');
+    if(!pages.some(function(p){return p.dataset.page===h;})) h='/';
+    pages.forEach(function(p){ p.classList.toggle('live', p.dataset.page===h); });
+    links.forEach(function(a){ a.classList.toggle('on', a.getAttribute('href')==='#'+h); });
+    document.getElementById('menu').classList.remove('open');
+    document.getElementById('burger').setAttribute('aria-expanded','false');
+    window.scrollTo({top:0,behavior:'instant'});
+    reveal();
+  }
+  window.addEventListener('hashchange', route);
+
+  document.getElementById('burger').addEventListener('click', function(){
+    var m = document.getElementById('menu');
+    var open = m.classList.toggle('open');
+    this.setAttribute('aria-expanded', open ? 'true':'false');
+  });
+
+  // scroll reveal
+  var io = null;
+  if('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    io = new IntersectionObserver(function(es){
+      es.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, {rootMargin:'0px 0px -8% 0px', threshold:.06});
+  }
+  function reveal(){
+    var els = document.querySelectorAll('.page.live .rv:not(.in)');
+    if(!io){ els.forEach(function(el){ el.classList.add('in'); }); return; }
+    els.forEach(function(el){ io.observe(el); });
+  }
+
+  route();
+})();
+</script>
+</body>
+</html>
